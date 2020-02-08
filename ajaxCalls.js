@@ -90,7 +90,6 @@ function convertKelvinToFahrenheit(tempKelvin)
 function updateCurrentWeatherInfo(currentWeatherData)
 {
     console.log("UPDATING CURRENT WEATHER INFO")
-    console.log(currentWeatherData)
 
     //  current date
 
@@ -121,12 +120,16 @@ function updateCurrentWeatherInfo(currentWeatherData)
     {
         type: 'GET',
         success: function (uvData) {
-            jq_current_uv_index.text(uvData.value);
+            const uvValue = uvData.value
+            const redValue = (uvValue / 10) * 255
+            const blueValue = 255 - redValue;
+            const hexColorCode = "#" + parseInt(redValue).toString(16) + "00" + parseInt(blueValue).toString(16);
+            jq_current_uv_index.text(uvValue);
+            console.log(hexColorCode);
+            jq_current_uv_index.css("background-color",hexColorCode);
+            console.log("DONE GETTING UVS")
         }
     })
-
-    //  UV Index
-
 }
 
 function updateAJAXInfo(city)
