@@ -5,31 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!--Bootstrap Link-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
     <!--Page Title-->
-    <title>Weatherizer</title>
+    <title>Weather</title>
 </head>
 <body>
     <!--Main Container-->
-    <nav class="navbar navbar-dark bg-dark">
+        
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <!-- Navbar content -->
-        <span class="navbar-brand header">Weatherizer</span>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="#"><span id="city_link1">Austin</span></a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#"><span id="city_link2">Denver</span></a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#"><span id="city_link3">Tokyo</span></a>
-              </li>
-            </ul>
-          </div>
+        <span class="navbar-brand header">Weather</span>
 
-        <form class="form-inline">
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">
+                        <span id="city_link1">Austin</span>
+                    </a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">
+                        <span id="city_link2">Denver</span>
+                    </a>
+                </li>
+                <li class="nav-item ml-auto">
+                    <a class="nav-link" href="#">
+                        <span id="city_link3">Tokyo</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <form class="form-inline ml-auto">
             <div class="input-group">
                 <input id="city_search_box" type="text" class="form-control" placeholder="City name" aria-label="Username" aria-describedby="basic-addon1">
                 <div class="input-group-append">
@@ -42,7 +54,7 @@
         <!--Weather Display-->
         <div class="row">
             <div class="col-12">
-                <div class="border border-dark rounded-lg m-2 p-3">
+                <div class="border border-dark rounded m-2 p-3">
                     <h2><span id="city_name">City Name</span> (<span id="current_date"></span>)</h2>
                     <p>Temperature: <span id="current_temp"></span> &deg;F</p>
                     <p>Humidity: <span id="current_humidity"></span>%</p>
@@ -54,7 +66,7 @@
 
         <!--5 day forecast-->
         <div class="row">
-            <div class="col-lg-2 offset-lg-1 my-2">
+            <div class="col-xl-2 offset-lg-1 my-2">
                 <div class="card fiveDayCard">
                     <img id = "fiveDay_icon1" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
@@ -68,7 +80,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 my-2">
+            <div class="col-xl-2 my-2">
                 <div class="card fiveDayCard">
                     <img id = "fiveDay_icon2" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
@@ -82,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 my-2">
+            <div class="col-xl-2 my-2">
                 <div class="card fiveDayCard">
                     <img id = "fiveDay_icon3" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
@@ -96,7 +108,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 my-2">
+            <div class="col-xl-2 my-2">
                 <div class="card fiveDayCard">
                     <img id = "fiveDay_icon4" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
@@ -110,7 +122,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 my-2">
+            <div class="col-xl-2 my-2">
                 <div class="card fiveDayCard">
                     <img id = "fiveDay_icon5" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
@@ -131,10 +143,12 @@
     </div>
 
     <!--Bootstrap Javascript-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <!--JQuery Full-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!--Custom Javascript-->
     <script src="ajaxCalls.js"></script>
 </body>

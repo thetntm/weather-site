@@ -2,8 +2,8 @@
 
 var apiKey = '9f7f37d7070c769fe52dc778ea34c92e';
 var currentWeatherURL = 'https://api.openweathermap.org/data/2.5/weather'
-var uvIndexURL = 'http://api.openweathermap.org/data/2.5/uvi'
-var fiveDayForecastURL = 'api.openweathermap.org/data/2.5/forecast'
+var uvIndexURL = 'https://api.openweathermap.org/data/2.5/uvi'
+var fiveDayForecastURL = 'https://api.openweathermap.org/data/2.5/forecast'
 
 //DOM ELEMENTS
 
@@ -132,19 +132,40 @@ function updateCurrentWeatherInfo(currentWeatherData)
     })
 }
 
-function updateAJAXInfo(city)
+function updateFiveDayForecast(fiveDayData)
 {
-    console.log("UPDATING AJAX INFO")
-    //Make an AJAX call to get the info for the citY
-    $.ajax('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=9f7f37d7070c769fe52dc778ea34c92e',   // request url
-    {
-        type: 'GET',
-        success: updateCurrentWeatherInfo
-    })
-
-    //Make an AJAX call to get the five day forecast
-
+    console.log("UPDATING FIVE DAY FORECAST")
+    console.log(fiveDayData);
+    let days = [[],[],[],[],[]];
+    let dates = ['','','','',''];
+    let icons = ['','','','',''];
+    let averageTemp = [0,0,0,0,0];
+    let averageHumidity = [0,0,0,0,0];
     //  Group them into groups of 8 based on index.
+    for (let i = 0; i < fiveDayData.list.length; i++) {
+        const weatherData = fiveDayData.list[i];
+        dayIndex = Math.floor(i/8) //Get the day in the 5 day period based on the index
+        days[dayIndex].push(weatherData)//Add the data for this 3 hour period onto the list based on what day it is.
+        averageTemp[dayIndex] += convertKelvinToFahrenheit(weatherData.main.temp);
+        averageHumidity[dayIndex] += weatherData.main.humidity;
+    }
+
+    for (let i = 0; i < days.length; i++) {
+        dates[i] = getDateFromUNIX(days[i][4].dt)
+        console.log(days[i][4]);
+        icons[i] = days[i][5].weather[0].icon;
+        averageTemp[i] = (averageTemp[i] / 8).toFixed(1);
+        averageHumidity[i] = (averageHumidity[i] / 8).toFixed(1);
+
+        jq_fiveDay_dates[i].text(dates[i]);
+        jq_fiveDay_icons[i].attr('src',"Assets/Weather_Icons/" + icons[i] + ".png");
+        jq_fiveDay_temps[i].text(averageTemp[i]);
+        jq_fiveDay_humidity[i].text(averageHumidity[i]);
+    }
+
+    console.log(dates)
+    console.log(averageTemp)
+    console.log(averageHumidity)
 
     //  Date of each day (can be got by getting like the 4th index)
 
@@ -153,6 +174,26 @@ function updateAJAXInfo(city)
     //  average temp
 
     //  average humidity
+
+}
+
+function updateAJAXInfo(city)
+{
+    console.log("UPDATING AJAX INFO")
+    //Make an AJAX call to get the info for the citY
+    $.ajax(currentWeatherURL + '?q=' + city + '&appid=' + apiKey,   // request url
+    {
+        type: 'GET',
+        success: updateCurrentWeatherInfo
+    });
+    //Make an AJAX call to get the five day forecast
+
+    $.ajax(fiveDayForecastURL + '?q=' + city + '&appid=' + apiKey,   // request url
+    {
+        type: 'GET',
+        success: updateFiveDayForecast
+    });
+    
 
 
     //set the city name
@@ -164,8 +205,6 @@ function updateAJAXInfo(city)
 //EVENT ASSIGNMENT
 
 //CODE TO RUN AT LAUNCH
-jq_current_uv_index.css("background-color","red")
-jq_current_uv_index.text("aaaa")
 console.log("code runs")
 
 updateAJAXInfo("Houston")
