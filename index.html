@@ -14,7 +14,7 @@
     <!--Main Container-->
     <nav class="navbar navbar-dark bg-dark">
         <!-- Navbar content -->
-        <span class="navbar-brand header">Weather Info</span>
+        <span class="navbar-brand header">Weather Dashboard</span>
 
         <form class="form-inline">
             <div class="input-group">
@@ -29,8 +29,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="border border-dark rounded-lg m-2 p-3">
-                    <h2><span id="city_name">City Name</span></h2>
-                    <p>Weather Info Goes Here</p>
+                    <h2><span id="city_name">City Name</span> (<span id="current_date"></span>)</h2>
+                    <p>Temperature: <span id="current_temp"></span> &deg;F</p>
+                    <p>Humidity: <span id="current_humidity"></span>%</p>
+                    <p>Wind Speed: <span id="current_wind_speed"></span> MPH</p>
+                    <p>UV Index: <div id="current_uv_index"></span></p>
                 </div>
             </div>
         </div>
@@ -39,46 +42,71 @@
         <div class="row">
             <div class="col-lg-2 offset-lg-1 my-2 fiveDayCol">
                 <div class="card fiveDayCard">
-                    <img src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
+                    <img id = "fiveDay_icon1" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
-                      <h5 class="card-title">Day 1</h5>
-                      <p class="card-text">Weather Info Here</p>
+                      <h5 class="card-title">
+                          <span id="fiveDay_date1">Day 1</span>
+                      </h5>
+                      <p class="card-text">
+                          <p>Temp: <span id="fiveDay_temp1"></span> &deg;F</p>
+                          <p>Humidity: <span id="fiveDay_humidity1"></span>%</p>
+                      </p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-2 my-2 fiveDayCol">
                 <div class="card fiveDayCard">
-                    <img src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
+                    <img id = "fiveDay_icon2" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
-                        <h5 class="card-title">Day 2</h5>
-                        <p class="card-text">Weather Info Here</p>
+                        <h5 class="card-title">
+                            <span id="fiveDay_date2">Day 2</span>
+                        </h5>
+                        <p class="card-text">
+                            <p>Temp: <span id="fiveDay_temp2"></span> &deg;F</p>
+                            <p>Humidity: <span id="fiveDay_humidity2"></span>%</p>
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-2 my-2 fiveDayCol">
                 <div class="card fiveDayCard">
-                    <img src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
+                    <img id = "fiveDay_icon3" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
-                        <h5 class="card-title">Day 3</h5>
-                        <p class="card-text">Weather Info Here</p>
+                        <h5 class="card-title">
+                            <span id="fiveDay_date3">Day 3</span>
+                        </h5>
+                        <p class="card-text">
+                            <p>Temp: <span id="fiveDay_temp3"></span> &deg;F</p>
+                            <p>Humidity: <span id="fiveDay_humidity3"></span>%</p>
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-2 my-2 fiveDayCol">
                 <div class="card fiveDayCard">
-                    <img src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
+                    <img id = "fiveDay_icon4" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
-                        <h5 class="card-title">Day 4</h5>
-                        <p class="card-text">Weather Info Here</p>
+                        <h5 class="card-title">
+                            <span id="fiveDay_date4">Day 4</span>
+                        </h5>
+                        <p class="card-text">
+                            <p>Temp: <span id="fiveDay_temp4"></span> &deg;F</p>
+                            <p>Humidity: <span id="fiveDay_humidity4"></span>%</p>
+                        </p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-2 my-2 fiveDayCol">
                 <div class="card fiveDayCard">
-                    <img src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
+                    <img id = "fiveDay_icon5" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
-                        <h5 class="card-title">Day 5</h5>
-                        <p class="card-text">Weather Info Here</p>
+                        <h5 class="card-title">
+                            <span id="fiveDay_date5">Day 5</span>
+                        </h5>
+                        <p class="card-text">
+                            <p>Temp: <span id="fiveDay_temp5"></span> &deg;F</p>
+                            <p>Humidity: <span id="fiveDay_humidity5"></span>%</p>
+                        </p>
                     </div>
                 </div>
             </div>
