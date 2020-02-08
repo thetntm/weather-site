@@ -2,3 +2,13 @@
 {
     font-size: xx-large;
 }
+
+.fiveDayCol
+{
+}
+
+.fiveDayCard
+{
+    max-width: 350px;
+    margin: auto;
+}

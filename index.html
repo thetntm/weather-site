@@ -27,11 +27,6 @@
     <div class="container-fluid">
         <!--Weather Display-->
         <div class="row">
-            <div class="col-12 mx-2 my-1">
-                <h2>City Info</h2>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-12">
                 <div class="border border-dark rounded-lg m-2 p-3">
                     <h2><span id="city_name">City Name</span></h2>
@@ -42,14 +37,8 @@
 
         <!--5 day forecast-->
         <div class="row">
-            <div class="col-12 mx-2 my-1">
-                <h2>5 Day Forecast</h2>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-2 offset-md-1 my-2">
-                <div class="card" style="max-width: 300px">
+            <div class="col-lg-2 offset-lg-1 my-2 fiveDayCol">
+                <div class="card fiveDayCard">
                     <img src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
                       <h5 class="card-title">Day 1</h5>
@@ -57,8 +46,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 my-2">
-                <div class="card" style="max-width: 300px">
+            <div class="col-lg-2 my-2 fiveDayCol">
+                <div class="card fiveDayCard">
                     <img src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
                         <h5 class="card-title">Day 2</h5>
@@ -66,8 +55,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 my-2">
-                <div class="card" style="max-width: 300px">
+            <div class="col-lg-2 my-2 fiveDayCol">
+                <div class="card fiveDayCard">
                     <img src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
                         <h5 class="card-title">Day 3</h5>
@@ -75,8 +64,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 my-2">
-                <div class="card" style="max-width: 300px">
+            <div class="col-lg-2 my-2 fiveDayCol">
+                <div class="card fiveDayCard">
                     <img src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
                         <h5 class="card-title">Day 4</h5>
@@ -84,8 +73,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 my-2">
-                <div class="card" style="max-width: 300px">
+            <div class="col-lg-2 my-2 fiveDayCol">
+                <div class="card fiveDayCard">
                     <img src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">
                         <h5 class="card-title">Day 5</h5>
@@ -98,9 +87,13 @@
 
 
     </div>
+
     <!--Bootstrap Javascript-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!--Custom Javascript-->
+    <script src="ajaxCalls.js"></script>
 </body>
 </html>
