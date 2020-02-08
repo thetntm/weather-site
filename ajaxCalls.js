@@ -4,6 +4,11 @@
 
 //DOM ELEMENTS
 
+//  Input
+var jq_city_search_box = $("#city_search_box")
+
+var jq_city_search_button = $("#city_search_button")
+
 //  Main Info
 var jq_city_name = $("#city_name")
 
