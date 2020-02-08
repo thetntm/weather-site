@@ -24,18 +24,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ml-auto">
-                    <a class="nav-link" href="#">
-                        <span id="city_link1">Austin</span>
+                    <a class="nav-link" id="city_link1" href="#">
+                        Austin
                     </a>
                 </li>
                 <li class="nav-item ml-auto">
-                    <a class="nav-link" href="#">
-                        <span id="city_link2">Denver</span>
+                    <a class="nav-link" id="city_link2" href="#">
+                        Denver
                     </a>
                 </li>
                 <li class="nav-item ml-auto">
-                    <a class="nav-link" href="#">
-                        <span id="city_link3">Tokyo</span>
+                    <a class="nav-link" id="city_link3" href="#">
+                        Tokyo
                     </a>
                 </li>
             </ul>
@@ -51,6 +51,17 @@
         </form>
     </nav>
     <div class="container-fluid">
+        <!--Error Box-->
+        <div class="row">
+            <div class="col-12">
+                <div class="border border-danger rounded m-2 p-3" id="error_box">
+                    <h3>Error</h3>
+                    <p>The city you entered does not exist, or may be misspelled!</p>
+                    <p>Be sure to use commas to seperate the city from the state, and to put the city name first!</p>
+                </div>
+            </div>
+        </div>
+
         <!--Weather Display-->
         <div class="row">
             <div class="col-12">
@@ -66,7 +77,7 @@
 
         <!--5 day forecast-->
         <div class="row">
-            <div class="col-xl-2 offset-lg-1 my-2">
+            <div class="col-xl-2 offset-xl-1 my-2">
                 <div class="card fiveDayCard">
                     <img id = "fiveDay_icon1" src="Assets/Weather_Icons/01d.png" class="card-img-top" alt="Sunny">
                     <div class="card-body">

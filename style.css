@@ -8,3 +8,9 @@
     max-width: 350px;
     margin: auto;
 }
+
+#error_box
+{
+    text-align: center;
+    display:none;
+}

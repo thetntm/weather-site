@@ -5,6 +5,8 @@ var currentWeatherURL = 'https://api.openweathermap.org/data/2.5/weather'
 var uvIndexURL = 'https://api.openweathermap.org/data/2.5/uvi'
 var fiveDayForecastURL = 'https://api.openweathermap.org/data/2.5/forecast'
 
+var displayedCityName = "Houston"
+
 //DOM ELEMENTS
 
 //  Input
@@ -72,6 +74,10 @@ var jq_fiveDay_humidity =
     $("#fiveDay_humidity5")
 ]
 
+// Misc
+
+var jq_error_box = $("#error_box")
+
 //LOCAL STORAGE
 
 //USEFUL FUNCTIONS
@@ -90,6 +96,10 @@ function convertKelvinToFahrenheit(tempKelvin)
 function updateCurrentWeatherInfo(currentWeatherData)
 {
     console.log("UPDATING CURRENT WEATHER INFO")
+
+    //city name
+
+    jq_city_name.text(displayedCityName);
 
     //  current date
 
@@ -136,6 +146,7 @@ function updateFiveDayForecast(fiveDayData)
 {
     console.log("UPDATING FIVE DAY FORECAST")
     console.log(fiveDayData);
+
     let days = [[],[],[],[],[]];
     let dates = ['','','','',''];
     let icons = ['','','','',''];
@@ -177,14 +188,29 @@ function updateFiveDayForecast(fiveDayData)
 
 }
 
+function showError()
+{
+    jq_error_box.css("display","block");
+}
+
+function hideError()
+{
+    jq_error_box.css("display","none");
+}
+
 function updateAJAXInfo(city)
 {
+    hideError();
+
+    displayedCityName = city;
+
     console.log("UPDATING AJAX INFO")
     //Make an AJAX call to get the info for the citY
     $.ajax(currentWeatherURL + '?q=' + city + '&appid=' + apiKey,   // request url
     {
         type: 'GET',
-        success: updateCurrentWeatherInfo
+        success: updateCurrentWeatherInfo,
+        error: showError
     });
     //Make an AJAX call to get the five day forecast
 
@@ -193,16 +219,49 @@ function updateAJAXInfo(city)
         type: 'GET',
         success: updateFiveDayForecast
     });
-    
-
-
     //set the city name
-    jq_city_name.text(city);
 }
 
 //EVENT FUNCTIONS
 
+function searchButtonClicked()
+{
+    console.log("search Button Clicked")
+    let city = jq_city_search_box.val();
+    if(!city)
+    {
+        return false;
+    }
+
+    city = city.charAt(0).toUpperCase() + city.slice(1); //Capitalize the first letter of city
+
+    updateAJAXInfo(city);
+
+    //Push the new search onto the city buttons
+
+    for (let i = 0; i < jq_city_links.length; i++) {
+        const cityButton = jq_city_links[i];
+        if (!(i==2))
+        {
+            cityButton.text(jq_city_links[i+1].text());
+        } else
+        {
+            cityButton.text(city);
+        }
+    }
+
+}
+
+function cityButtonClicked(button)
+{
+    let city = jq_city_links[button].text();
+    updateAJAXInfo(city);
+}
 //EVENT ASSIGNMENT
+for (let i = 0; i < jq_city_links.length; i++) {
+    jq_city_links[i].click(function () {cityButtonClicked(i)});
+}
+jq_city_search_button.click(searchButtonClicked);
 
 //CODE TO RUN AT LAUNCH
 console.log("code runs")
