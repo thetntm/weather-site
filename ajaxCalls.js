@@ -1,6 +1,9 @@
 //GLOBAL VARS
 
-//LOCAL STORAGE
+var apiKey = '9f7f37d7070c769fe52dc778ea34c92e';
+var currentWeatherURL = 'https://api.openweathermap.org/data/2.5/weather'
+var uvIndexURL = 'http://api.openweathermap.org/data/2.5/uvi'
+var fiveDayForecastURL = 'api.openweathermap.org/data/2.5/forecast'
 
 //DOM ELEMENTS
 
@@ -8,6 +11,12 @@
 var jq_city_search_box = $("#city_search_box")
 
 var jq_city_search_button = $("#city_search_button")
+
+var jq_city_links = [
+    $("#city_link1"),
+    $("#city_link2"),
+    $("#city_link3")
+]
 
 //  Main Info
 var jq_city_name = $("#city_name")
@@ -63,7 +72,53 @@ var jq_fiveDay_humidity =
     $("#fiveDay_humidity5")
 ]
 
+//LOCAL STORAGE
+
 //USEFUL FUNCTIONS
+
+function updateCurrentWeatherInfo(data)
+{
+    console.log("UPDATING CURRENT WEATHER INFO")
+    console.log(data)
+    //  current date
+
+    //  current temp
+
+    //  current humid
+
+    //  current wind speed
+
+    //  Lat and Long
+
+    //In that AJAX call Make a call to get the UV index
+
+    //  UV Index
+
+}
+
+function updateAJAXInfo(city)
+{
+    console.log("UPDATING AJAX INFO")
+    //Make an AJAX call to get the info for the citY
+    $.ajax('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=9f7f37d7070c769fe52dc778ea34c92e',   // request url
+    {
+        type: 'GET',
+        success: updateCurrentWeatherInfo
+    })
+
+    //Make an AJAX call to get the five day forecast
+
+    //  Group them into groups of 8 based on index.
+
+    //  Date of each day (can be got by getting like the 4th index)
+
+    //  Icon for each day
+
+    //  average temp
+
+    //  average humidity
+
+}
 
 //EVENT FUNCTIONS
 
@@ -72,4 +127,6 @@ var jq_fiveDay_humidity =
 //CODE TO RUN AT LAUNCH
 jq_current_uv_index.css("background-color","red")
 jq_current_uv_index.text("aaaa")
-console.log("success!")
+console.log("code runs")
+
+updateAJAXInfo("Houston")
