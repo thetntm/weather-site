@@ -76,21 +76,54 @@ var jq_fiveDay_humidity =
 
 //USEFUL FUNCTIONS
 
-function updateCurrentWeatherInfo(data)
+function getDateFromUNIX(unixDate)
+{
+    const currentDate = new Date(unixDate * 1000);
+    return currentDate.toDateString().substring(4).replace(/\s/g,'/');
+}
+
+function convertKelvinToFahrenheit(tempKelvin)
+{
+    return (tempKelvin - 273.15) * 9/5 + 32
+}
+
+function updateCurrentWeatherInfo(currentWeatherData)
 {
     console.log("UPDATING CURRENT WEATHER INFO")
-    console.log(data)
+    console.log(currentWeatherData)
+
     //  current date
+    
+    const currentUNIXtime = currentWeatherData.dt + currentWeatherData.timezone;
+
+    jq_current_date.text(getDateFromUNIX(currentUNIXtime));
 
     //  current temp
 
+    jq_current_temp.text(convertKelvinToFahrenheit(currentWeatherData.main.temp).toFixed(1));
+
     //  current humid
 
+    jq_current_humidity.text(currentWeatherData.main.humidity);
+
     //  current wind speed
+
+    jq_current_wind_speed.text(currentWeatherData.wind.speed);
 
     //  Lat and Long
 
     //In that AJAX call Make a call to get the UV index
+
+    const lon = currentWeatherData.coord.lon;
+    const lat = currentWeatherData.coord.lat;
+
+    $.ajax(uvIndexURL + '?appid=' + apiKey + '&lat=' + lat + '&lon=' + lon,   // request url
+    {
+        type: 'GET',
+        success: function (uvData) {
+            jq_current_uv_index.text(uvData.value);
+        }
+    })
 
     //  UV Index
 
@@ -118,6 +151,9 @@ function updateAJAXInfo(city)
 
     //  average humidity
 
+
+    //set the city name
+    jq_city_name.text(city);
 }
 
 //EVENT FUNCTIONS
