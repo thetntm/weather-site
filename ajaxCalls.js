@@ -93,7 +93,7 @@ function updateCurrentWeatherInfo(currentWeatherData)
     console.log(currentWeatherData)
 
     //  current date
-    
+
     const currentUNIXtime = currentWeatherData.dt + currentWeatherData.timezone;
 
     jq_current_date.text(getDateFromUNIX(currentUNIXtime));
@@ -110,7 +110,7 @@ function updateCurrentWeatherInfo(currentWeatherData)
 
     jq_current_wind_speed.text(currentWeatherData.wind.speed);
 
-    //  Lat and Long
+    console.log("DONE SETTING VALUES")
 
     //In that AJAX call Make a call to get the UV index
 
