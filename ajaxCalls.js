@@ -71,3 +71,5 @@ var jq_fiveDay_humidity =
 
 //CODE TO RUN AT LAUNCH
 jq_current_uv_index.css("background-color","red")
+jq_current_uv_index.text("aaaa")
+console.log("success!")
