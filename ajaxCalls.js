@@ -155,8 +155,12 @@ function updateCurrentWeatherInfo(currentWeatherData)
         success: function (uvData) {
             const uvValue = uvData.value
             const redValue = (uvValue / 10) * 255
-            const blueValue = 255 - redValue;
-            const hexColorCode = "#" + parseInt(redValue).toString(16) + "00" + parseInt(blueValue).toString(16);
+            const greenValue = 255 - redValue;
+            let hexColorCode = "#" + parseInt(redValue).toString(16) + parseInt(greenValue).toString(16) + "00";
+            if (redValue > 255)//if extreme UV rays are present
+            {
+                hexColorCode = "#AA00FF";
+            };
             jq_current_uv_index.text(uvValue);
             jq_current_uv_index.css("background-color",hexColorCode);
         }
