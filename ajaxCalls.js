@@ -6,6 +6,7 @@ var uvIndexURL = 'https://api.openweathermap.org/data/2.5/uvi'
 var fiveDayForecastURL = 'https://api.openweathermap.org/data/2.5/forecast'
 
 var displayedCityName = "Houston"; //Used to keep track of the name typed through the AJAX request
+//WARNING: displayedCityName is not always accurate. to get the currently displayed name, use jq_city_name.text()
 
 var addCity = false; //Used to keep track of how the AJAX method was run, to determine if a city should be added to the list or not
 
@@ -82,7 +83,29 @@ var jq_error_box = $("#error_box")
 
 //LOCAL STORAGE
 
+var stored_city_info = JSON.parse(localStorage.getItem("cities"))
+
+if (!stored_city_info)
+{
+    stored_city_info = ["Houston","Austin","Denver","Tokyo"];
+}
+
+jq_city_links[0].text(stored_city_info[1]);
+jq_city_links[1].text(stored_city_info[2]);
+jq_city_links[2].text(stored_city_info[3]);
+
+
 //USEFUL FUNCTIONS
+
+function updateLocalStorage()
+{
+    stored_city_info[0] = jq_city_name.text();
+    stored_city_info[1] = jq_city_links[0].text();
+    stored_city_info[2] = jq_city_links[1].text();
+    stored_city_info[3] = jq_city_links[2].text();
+
+    localStorage.setItem("cities",JSON.stringify(stored_city_info));
+}
 
 function getDateFromUNIX(unixDate)
 {
@@ -139,6 +162,8 @@ function updateCurrentWeatherInfo(currentWeatherData)
         }
     })
 
+    //code to run on successful ajax call
+
     if(addCity)
     {
 
@@ -146,6 +171,7 @@ function updateCurrentWeatherInfo(currentWeatherData)
             const city = jq_city_links[i].text();
             if (city == displayedCityName)
             {
+                updateLocalStorage();
                 return true;
             }
         }
@@ -162,6 +188,7 @@ function updateCurrentWeatherInfo(currentWeatherData)
                 cityButton.text(displayedCityName);
             }
         }
+        updateLocalStorage();
     }
 }
 
@@ -268,4 +295,4 @@ jq_city_search_box.on('keypress',function(event) {
 
 //CODE TO RUN AT LAUNCH
 
-updateAJAXInfo("Houston")
+updateAJAXInfo(stored_city_info[0]);
