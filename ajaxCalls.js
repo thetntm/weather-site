@@ -5,7 +5,9 @@ var currentWeatherURL = 'https://api.openweathermap.org/data/2.5/weather'
 var uvIndexURL = 'https://api.openweathermap.org/data/2.5/uvi'
 var fiveDayForecastURL = 'https://api.openweathermap.org/data/2.5/forecast'
 
-var displayedCityName = "Houston"
+var displayedCityName = "Houston"; //Used to keep track of the name typed through the AJAX request
+
+var addCity = false; //Used to keep track of how the AJAX method was run, to determine if a city should be added to the list or not
 
 //DOM ELEMENTS
 
@@ -95,7 +97,6 @@ function convertKelvinToFahrenheit(tempKelvin)
 
 function updateCurrentWeatherInfo(currentWeatherData)
 {
-    console.log("UPDATING CURRENT WEATHER INFO")
 
     //city name
 
@@ -119,7 +120,6 @@ function updateCurrentWeatherInfo(currentWeatherData)
 
     jq_current_wind_speed.text(currentWeatherData.wind.speed);
 
-    console.log("DONE SETTING VALUES")
 
     //In that AJAX call Make a call to get the UV index
 
@@ -135,18 +135,38 @@ function updateCurrentWeatherInfo(currentWeatherData)
             const blueValue = 255 - redValue;
             const hexColorCode = "#" + parseInt(redValue).toString(16) + "00" + parseInt(blueValue).toString(16);
             jq_current_uv_index.text(uvValue);
-            console.log(hexColorCode);
             jq_current_uv_index.css("background-color",hexColorCode);
-            console.log("DONE GETTING UVS")
         }
     })
+
+    if(addCity)
+    {
+
+        for (let i = 0; i < jq_city_links.length; i++) {
+            const city = jq_city_links[i].text();
+            if (city == displayedCityName)
+            {
+                return true;
+            }
+        }
+
+        //Push the new search onto the city buttons
+        
+        for (let i = 0; i < jq_city_links.length; i++) {
+            const cityButton = jq_city_links[i];
+            if (!(i==2))
+            {
+                cityButton.text(jq_city_links[i+1].text());
+            } else
+            {
+                cityButton.text(displayedCityName);
+            }
+        }
+    }
 }
 
 function updateFiveDayForecast(fiveDayData)
 {
-    console.log("UPDATING FIVE DAY FORECAST")
-    console.log(fiveDayData);
-
     let days = [[],[],[],[],[]];
     let dates = ['','','','',''];
     let icons = ['','','','',''];
@@ -163,7 +183,6 @@ function updateFiveDayForecast(fiveDayData)
 
     for (let i = 0; i < days.length; i++) {
         dates[i] = getDateFromUNIX(days[i][4].dt)
-        console.log(days[i][4]);
         icons[i] = days[i][5].weather[0].icon;
         averageTemp[i] = (averageTemp[i] / 8).toFixed(1);
         averageHumidity[i] = (averageHumidity[i] / 8).toFixed(1);
@@ -173,19 +192,6 @@ function updateFiveDayForecast(fiveDayData)
         jq_fiveDay_temps[i].text(averageTemp[i]);
         jq_fiveDay_humidity[i].text(averageHumidity[i]);
     }
-
-    console.log(dates)
-    console.log(averageTemp)
-    console.log(averageHumidity)
-
-    //  Date of each day (can be got by getting like the 4th index)
-
-    //  Icon for each day
-
-    //  average temp
-
-    //  average humidity
-
 }
 
 function showError()
@@ -204,7 +210,6 @@ function updateAJAXInfo(city)
 
     displayedCityName = city;
 
-    console.log("UPDATING AJAX INFO")
     //Make an AJAX call to get the info for the citY
     $.ajax(currentWeatherURL + '?q=' + city + '&appid=' + apiKey,   // request url
     {
@@ -219,14 +224,12 @@ function updateAJAXInfo(city)
         type: 'GET',
         success: updateFiveDayForecast
     });
-    //set the city name
 }
 
 //EVENT FUNCTIONS
 
 function searchButtonClicked()
 {
-    console.log("search Button Clicked")
     let city = jq_city_search_box.val();
     if(!city)
     {
@@ -235,35 +238,34 @@ function searchButtonClicked()
 
     city = city.charAt(0).toUpperCase() + city.slice(1); //Capitalize the first letter of city
 
+    addCity = true;
+
     updateAJAXInfo(city);
-
-    //Push the new search onto the city buttons
-
-    for (let i = 0; i < jq_city_links.length; i++) {
-        const cityButton = jq_city_links[i];
-        if (!(i==2))
-        {
-            cityButton.text(jq_city_links[i+1].text());
-        } else
-        {
-            cityButton.text(city);
-        }
-    }
 
 }
 
 function cityButtonClicked(button)
 {
     let city = jq_city_links[button].text();
+
+    addCity = false;
+
     updateAJAXInfo(city);
 }
+
 //EVENT ASSIGNMENT
 for (let i = 0; i < jq_city_links.length; i++) {
     jq_city_links[i].click(function () {cityButtonClicked(i)});
 }
+
 jq_city_search_button.click(searchButtonClicked);
 
+jq_city_search_box.on('keypress',function(event) {
+    if(event.which == 13) {
+        searchButtonClicked();
+    }
+});
+
 //CODE TO RUN AT LAUNCH
-console.log("code runs")
 
 updateAJAXInfo("Houston")
