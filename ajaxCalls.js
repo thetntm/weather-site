@@ -163,6 +163,10 @@ function updateCurrentWeatherInfo(currentWeatherData)
             };
             jq_current_uv_index.text(uvValue);
             jq_current_uv_index.css("background-color",hexColorCode);
+        },
+        error: function (uvData) {
+            jq_current_uv_index.text("ERR");
+            jq_current_uv_index.css("background-color","violet");
         }
     })
 
